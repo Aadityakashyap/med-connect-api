@@ -56,7 +56,7 @@ npm test
 
 ## Scripts
 
-- `npm run db:setup` — run migrations.sql + seed.sql via scripts/dbSetup.js
+- `npm run db:setup` — run migrations.sql + seed.sql via src/sql/dbSetup.js
 - `npm test` — run test script via Jest + Supertest e2e tests/fullFlow.test.js
 - `npm run dev` — start dev server
 
