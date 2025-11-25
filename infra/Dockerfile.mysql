@@ -1,0 +1,6 @@
+FROM mysql:8
+ENV MYSQL_DATABASE=medconnectapi \
+    MYSQL_USER=medconnectapi_dev \
+    MYSQL_PASSWORD=devpass \
+    MYSQL_ROOT_PASSWORD=root
+COPY mysql-init.sql /docker-entrypoint-initdb.d/

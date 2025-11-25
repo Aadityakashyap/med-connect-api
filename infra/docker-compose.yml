@@ -1,0 +1,30 @@
+version: "3.8"
+services:
+  mysql:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile.mysql
+    ports:
+      - "3306:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: medconnectapi
+      MYSQL_USER: medconnectapi_dev
+      MYSQL_PASSWORD: devpass
+
+  api:
+    build:
+      context: .
+      dockerfile: infra/Dockerfile.api
+    environment:
+      DB_HOST: mysql
+      DB_USER: medconnectapi_dev
+      DB_PASSWORD: devpass
+      DB_NAME: medconnectapi
+      JWT_SECRET: dev_secret
+      METRICS_ENABLED: "true"
+    depends_on:
+      - mysql
+    ports:
+      - "4000:4000"
+    command: sh -c "node src/sql/dbSetup.js && node src/server.js"
